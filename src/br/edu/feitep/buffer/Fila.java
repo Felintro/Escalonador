@@ -3,7 +3,6 @@ package br.edu.feitep.buffer;
 import br.edu.feitep.processo.Processo;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Fila {
@@ -26,7 +25,7 @@ public class Fila {
         return buffer.get(buffer.size()-1);
     }
 
-    public Processo[] getBuffer() {
+    public List<Processo> getBuffer() {
         return buffer;
     }
 
@@ -40,6 +39,8 @@ public class Fila {
 
         Processo primeiro = getPrimeiroDaFila();
         buffer.remove(0);
+
+        return primeiro;
 
     }
 

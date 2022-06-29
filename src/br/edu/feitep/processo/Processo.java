@@ -71,8 +71,9 @@ public class Processo implements Comparable<Processo> {
         return "Processo:{" + "Nome= " + nome + ", Status= " + status + ", Quantum= " + quantum + ", Prioridade= " + prioridade + "}";
     }
 
-    public void gastaQuantum() {
+    public void executaProcesso() {
         this.quantum--;
+        System.out.println(this.toString());
     }
 
 
