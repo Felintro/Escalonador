@@ -7,7 +7,6 @@ public class Processo implements Comparable<Processo> {
     private String tipoPrioridade;
     private int quantum;
     private int prioridade;
-    private int[] tickets;
 
     public Processo(String nome) {
         this.nome = nome;
@@ -48,14 +47,6 @@ public class Processo implements Comparable<Processo> {
 
     public void setPrioridade(int prioridade) {
         this.prioridade = prioridade;
-    }
-
-    public int[] getTickets() {
-        return tickets;
-    }
-
-    public void setTickets(int[] tickets) {
-        this.tickets = tickets;
     }
 
     public String getTipoPrioridade() {

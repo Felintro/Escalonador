@@ -13,10 +13,6 @@ public class Fila {
 
     }
 
-    public int getN() {
-        return buffer.size();
-    }
-
     public Processo getPrimeiroDaFila() {
         return buffer.get(0);
     }
@@ -30,9 +26,7 @@ public class Fila {
     }
 
     public void enfileirarProcesso(Processo processo) { /* Insere 1 processo novo na fila de processos */
-
         buffer.add(processo);
-
     }
 
     public Processo desenfileirarProcesso() {
@@ -42,10 +36,6 @@ public class Fila {
 
         return primeiro;
 
-    }
-
-    public boolean isVazia() {
-        return buffer.size() == 0;
     }
 
     @Override

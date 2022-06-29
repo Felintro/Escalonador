@@ -19,13 +19,9 @@ public class Escalonador {
 
         for(int i=0; i<qtdeProcessos; i++){
             fila.enfileirarProcesso(new Processo("Processo " + i)); /* Inicia os processos na fila */
-            forneceQuantum(fila.getBuffer().get(i)); /* Fornece os quantums aos processos da fila */
-            fornecePrioridade(fila.getBuffer().get(i)); /* Fornece as prioridades aos processos da fila */
+            forneceQuantumAleatorio(fila.getBuffer().get(i)); /* Fornece os quantums aos processos da fila */
+            fornecePrioridadeAleatoria(fila.getBuffer().get(i)); /* Fornece as prioridades aos processos da fila */
         }
-
-    }
-
-    public Escalonador(int qtdeProcessos, int ciclos, String teste) {
 
     }
 
@@ -33,7 +29,7 @@ public class Escalonador {
 
         ultimoProcessoDaFila = fila.getUltimoDaFila();
 
-        while(ciclos != 0){
+        while(ciclos != 0) {
 
             processoEmExecucao = fila.getPrimeiroDaFila();
             processoEmExecucao.setStatus("Executando");
@@ -43,7 +39,7 @@ public class Escalonador {
             }
 
             processoEmExecucao.setStatus("Pronto");
-            this.forneceQuantum(processoEmExecucao); /* Para a próxima execução/iteração */
+            this.forneceQuantumAleatorio(processoEmExecucao); /* Para a próxima execução/iteração */
 
             fila.desenfileirarProcesso(); /* Remove o processo em execução da fila */
             fila.enfileirarProcesso(processoEmExecucao); /* E insere no fim da fila */
@@ -76,7 +72,7 @@ public class Escalonador {
             }
 
             processoEmExecucao.setStatus("Pronto");
-            this.forneceQuantum(processoEmExecucao); /* Para a próxima execução/iteração */
+            this.forneceQuantumAleatorio(processoEmExecucao); /* Para a próxima execução/iteração */
 
             fila.desenfileirarProcesso(); /* Remove o processo em execução da fila */
             fila.enfileirarProcesso(processoEmExecucao); /* E insere no fim da fila */
@@ -86,7 +82,7 @@ public class Escalonador {
                 System.out.println("Ciclos Restantes: " + ciclos);
 
                 for (Processo processo : fila.getBuffer()) {
-                    fornecePrioridade(processo); /* Fornece nova prioridade */
+                    fornecePrioridadeAleatoria(processo); /* Fornece nova prioridade */
                 }
 
                 Collections.sort(fila.getBuffer()); /* Ordena a fila novamente com base na prioridade */
@@ -96,12 +92,6 @@ public class Escalonador {
             }
 
         }
-
-    }
-
-    public void ComClasseDePrioridades() {
-
-
 
     }
 
@@ -124,7 +114,7 @@ public class Escalonador {
             }
 
             processoEmExecucao.setStatus("Pronto");
-            this.forneceQuantum(processoEmExecucao); /* Para a próxima execução/iteração */
+            this.forneceQuantumAleatorio(processoEmExecucao); /* Para a próxima execução/iteração */
 
             fila.desenfileirarProcesso(); /* Remove o processo em execução da fila */
             fila.enfileirarProcesso(processoEmExecucao); /* E insere no fim da fila */
@@ -134,7 +124,7 @@ public class Escalonador {
                 System.out.println("Ciclos Restantes: " + ciclos);
 
                 for (Processo processo : fila.getBuffer()) {
-                    fornecePrioridade(processo); /* Fornece nova prioridade */
+                    fornecePrioridadeAleatoria(processo); /* Fornece nova prioridade */
                 }
             }
 
@@ -142,24 +132,82 @@ public class Escalonador {
 
     }
 
-    public void loteria() {
+    public void compartilhamentoJusto() {
+
+        Fila filaUsuario1 = new Fila();
+        Fila filaUsuario2 = new Fila();
+
+        for (Processo processo : fila.getBuffer()) {
+
+            forneceQuantumFixo(processo, 10);
+
+            if(processo.getNome().equalsIgnoreCase("Processo 0") || processo.getNome().equalsIgnoreCase("Processo 1") || processo.getNome().equalsIgnoreCase("Processo 2")) {
+                filaUsuario1.getBuffer().add(processo);
+            } else {
+                filaUsuario2.getBuffer().add(processo);
+            }
+
+        }
+
+        fila.getBuffer().clear();
+
+        System.out.println("Processos 0, 1 e 2 foram adicionados ao usuário 1!");
+        System.out.println("Restante dos processos foram adicionados ao usuário 2!");
+        System.out.println("");
+        System.out.println("Iniciando execução do usuário 1:");
+
+        while(filaUsuario1.getBuffer().size() != 0) {
+
+            processoEmExecucao = filaUsuario1.getPrimeiroDaFila();
+            processoEmExecucao.setStatus("Executando");
+
+            while(processoEmExecucao.getQuantum() != 0) {
+                processoEmExecucao.executaProcesso();
+            }
+
+            processoEmExecucao.setStatus("Terminado");
+
+            filaUsuario1.desenfileirarProcesso(); /* Remove o processo em execução da fila */
+
+        }
+
+        System.out.println("");
+        System.out.println("Iniciando execução do usuário 2:");
+
+        while(filaUsuario2.getBuffer().size() != 0) {
+
+            processoEmExecucao = filaUsuario2.getPrimeiroDaFila();
+            processoEmExecucao.setStatus("Executando");
+
+            while(processoEmExecucao.getQuantum() != 0) {
+                processoEmExecucao.executaProcesso();
+            }
+
+            processoEmExecucao.setStatus("Terminado");
+
+            filaUsuario2.desenfileirarProcesso(); /* Remove o processo em execução da fila */
+
+        }
+
+
 
     }
 
-    private void compartilhamentoJusto() {
-
-
-
-    }
-
-    private void forneceQuantum(Processo processo) {
+    private void forneceQuantumAleatorio(Processo processo) {
         processo.setQuantum(new Random().nextInt(100)+1); /* Fornece um quantum aleatório ao processo de 1 a 100, simulando os milissegundos */
     }
 
-    private void fornecePrioridade(Processo processo) {
+    private void fornecePrioridadeAleatoria(Processo processo) {
         processo.setPrioridade(new Random().nextInt(10) + 1); /* Fornece uma prioridade aleatória ao processo de 1 a 10 */
     }
 
-    private
+    private void forneceQuantumFixo(Processo processo, int quantum) {
+        processo.setQuantum(quantum); /* Fornece um quantum fixo ao processo */
+    }
+
+    private void fornecePrioridadeFixa(Processo processo, int prioridade) {
+        processo.setPrioridade(prioridade); /* Fornece uma priorirade fixa ao processo */
+    }
+
 
 }
