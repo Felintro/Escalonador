@@ -7,7 +7,6 @@ public class Processo implements Comparable<Processo> {
     private String tipoPrioridade;
     private int quantum;
     private int prioridade;
-    private int[] tickets;
 
     public Processo(String nome) {
         this.nome = nome;
@@ -50,14 +49,6 @@ public class Processo implements Comparable<Processo> {
         this.prioridade = prioridade;
     }
 
-    public int[] getTickets() {
-        return tickets;
-    }
-
-    public void setTickets(int[] tickets) {
-        this.tickets = tickets;
-    }
-
     public String getTipoPrioridade() {
         return tipoPrioridade;
     }
@@ -71,8 +62,9 @@ public class Processo implements Comparable<Processo> {
         return "Processo:{" + "Nome= " + nome + ", Status= " + status + ", Quantum= " + quantum + ", Prioridade= " + prioridade + "}";
     }
 
-    public void gastaQuantum() {
+    public void executaProcesso() {
         this.quantum--;
+        System.out.println(this.toString());
     }
 
 

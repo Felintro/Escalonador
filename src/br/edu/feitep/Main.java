@@ -1,59 +1,43 @@
 package br.edu.feitep;
 
-import br.edu.feitep.buffer.Fila;
 import br.edu.feitep.escalonador.Escalonador;
-import br.edu.feitep.processo.Processo;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
 
-/*
-        Fila fila = new Fila(5);
-        fila.enfileirarProcesso(new Processo("A"));
-        fila.enfileirarProcesso(new Processo("B"));
-        fila.enfileirarProcesso(new Processo("C"));
-        fila.enfileirarProcesso(new Processo("D"));
+        Scanner scanner = new Scanner(System.in);
 
+        System.out.println("========= Bem-Vindo ao Escalonador =========");
+        System.out.println("===== Selecione o algoritmo desejado =======");
+        System.out.println("1 - Escalonamento Round Robin");
+        System.out.println("2 - Escalonamento Com Prioridades");
+        System.out.println("3 - Escalonamento do Próximo Menor Tempo");
+        System.out.println("4 - Escalonamento por Compartilhamento Justo");
+        int seletor = scanner.nextInt();
 
-        System.out.println("Antes");
-        System.out.println(fila.toString());
+        Escalonador escalonador = new Escalonador(10, 5);
 
-        System.out.println("Depois de desenfileirar:");
-        Processo primeiro = fila.desenfileirarProcesso();
-        System.out.println(fila.toString());
+        switch (seletor) {
+            case 1:
+                escalonador.roundRobin();
+                break;
 
-        System.out.println("Depois de enfileirar:");
-        fila.enfileirarProcesso(primeiro);
-        System.out.println(fila.toString());
+            case 2:
+                escalonador.comPrioridades();
+                break;
 
-        System.out.println("");
+            case 3:
+                escalonador.proximoMenorTempo();
+                break;
 
+            case 4:
+                escalonador.compartilhamentoJusto();
+                break;
 
-
-        Escalonador escalonador = new Escalonador(5, 5);
-        escalonador.roundRobin();
-        escalonador.comPrioridades();
-
-
- */
-
-        List<Processo> listaProcessos = new ArrayList<>();
-        listaProcessos.add(new Processo("A"));
-        listaProcessos.add(new Processo("B"));
-        listaProcessos.add(new Processo("C"));
-        System.out.println(listaProcessos.toString());
-        System.out.println("");
-
-        listaProcessos.remove(0);
-        listaProcessos.add(new Processo("A"));
-        System.out.println(listaProcessos.toString());
-
-        listaProcessos.get(listaProcessos.size()-1)
-
+        }
 
     }
 }
