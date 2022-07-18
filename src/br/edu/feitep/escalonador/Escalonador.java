@@ -189,8 +189,6 @@ public class Escalonador {
 
         }
 
-
-
     }
 
     private void forneceQuantumAleatorio(Processo processo) {
@@ -204,10 +202,5 @@ public class Escalonador {
     private void forneceQuantumFixo(Processo processo, int quantum) {
         processo.setQuantum(quantum); /* Fornece um quantum fixo ao processo */
     }
-
-    private void fornecePrioridadeFixa(Processo processo, int prioridade) {
-        processo.setPrioridade(prioridade); /* Fornece uma priorirade fixa ao processo */
-    }
-
 
 }

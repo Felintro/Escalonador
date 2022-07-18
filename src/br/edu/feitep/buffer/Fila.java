@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Fila {
 
-    private List<Processo> buffer = new ArrayList<Processo>();
+    private List<Processo> buffer = new ArrayList<>();
 
     public Fila() {
 
